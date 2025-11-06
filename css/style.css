@@ -158,16 +158,20 @@ body.dark-theme {
     #result {
         font-size: 1.05rem;
         line-height: 1.6;
-        padding: 15px;
-        margin-top: 15px;
+        padding: 15px 12px;
+        margin: 15px 0 0 0;
         border-radius: 12px;
         max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .comment-line {
         font-size: 0.95rem;
         margin: 8px 0;
         padding: 6px 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 }
 
@@ -354,7 +358,9 @@ button.wrong {
     background: var(--result-bg-light);
     border-radius: 14px;
     border: 1px dashed #ff8fb1;
-    max-width: 90%;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
     opacity: 0;
     transform: translateY(10px);
     transition: all 0.5s ease;
