@@ -104,6 +104,7 @@
             transform: translateY(-2px);
         }
         #result {
+            display: none; /* 初始状态隐藏 */
             margin-top: 25px;
             font-size: 1.55rem;
             color: #ff6b9d;
@@ -114,6 +115,14 @@
             border-radius: 14px;
             border: 1px dashed #ff8fb1;
             max-width: 90%;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease;
+        }
+        #result.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
         .comment-line {
             margin: 8px 0;
@@ -297,6 +306,7 @@ function startJudgementTimer(reset = true) {
     if (reset) timeLeft = 60;
     timerDisplay.textContent = `剩余时间：${timeLeft}秒`;
     resultDisplay.textContent = '';
+    resultDisplay.classList.remove('show');
     gameTimer = setInterval(() => {
         timeLeft--;
         timerDisplay.textContent = `剩余时间：${timeLeft}秒`;
@@ -323,6 +333,10 @@ function startJudgementTimer(reset = true) {
                     ${comment.split('～').map(line => line ? `<div class="comment-line">${line}～</div>` : '').join('')}
                 </div>
             `;
+            // 添加动画效果
+            setTimeout(() => {
+                resultDisplay.classList.add('show');
+            }, 100);
         }
     }, 1000);
 }
