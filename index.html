@@ -98,6 +98,7 @@
             font-size: 1.15rem;
             border-radius: 50px;
             box-shadow: 0 4px 12px rgba(255,107,157,.3);
+            display: none;
         }
         #restart-judgement:hover { 
             background: #ff4081; 
@@ -112,8 +113,7 @@
             padding: 18px;
             background: rgba(255,240,248,.8);
             border-radius: 14px;
-            border: 1px dashed #ff8fb1;
-            max-width: 90%;
+            display: none;
         }
         .comment-line {
             margin: 8px 0;
@@ -122,6 +122,14 @@
         }
         .comment-line:last-child {
             border-bottom: none;
+        }
+        .game-end #result,
+        .game-end #restart-judgement {
+            display: block;
+        }
+        .game-end #color-display,
+        .game-end .options {
+            display: none;
         }
     </style>
 </head>
@@ -293,6 +301,7 @@ function getRandomComment(level) {
 }
 
 function startJudgementTimer(reset = true) {
+    gameContainer.classList.remove('game-end');
     clearInterval(gameTimer);
     if (reset) timeLeft = 60;
     timerDisplay.textContent = `剩余时间：${timeLeft}秒`;
@@ -304,6 +313,7 @@ function startJudgementTimer(reset = true) {
             clearInterval(gameTimer);
             gameTimer = null;
             optionsContainer.innerHTML = '';
+            gameContainer.classList.add('game-end');
 
             let level = '';
             if (judgementScore >= 24) level = 'perfect';
