@@ -225,7 +225,7 @@ const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 function updateThemeColor(isDark) {
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
-        metaThemeColor.setAttribute('content', isDark ? '#0a0408' : '#ffd1e3');
+        metaThemeColor.setAttribute('content', isDark ? '#0a0408' : '#f5e6ed');
     }
 }
 
