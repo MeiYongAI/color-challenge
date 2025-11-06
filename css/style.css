@@ -80,8 +80,8 @@ body.dark-theme {
         padding: 0;
         overflow-y: auto;
         height: 100vh;
-        justify-content: center;
-        padding-top: 60px;
+        justify-content: flex-start;
+        padding-top: 20px;
         padding-bottom: 15px;
     }
     
@@ -255,10 +255,10 @@ h1 {
 
 .options {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(2, minmax(140px, 200px));
     gap: 16px;
-    margin: 20px 0;
-    max-width: 600px;
+    margin: 20px auto;
+    justify-content: center;
 }
 
 button {
