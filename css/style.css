@@ -68,29 +68,72 @@ body.dark-theme {
 }
 
 @media (max-width: 600px) {
+    body {
+        padding: 10px;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+    }
+    
     #theme-toggle {
-        top: auto;
-        bottom: 15px;
-        right: 50%;
-        transform: translateX(50%);
-        padding: 10px 24px;
-        font-size: 1rem;
+        top: 10px;
+        right: 10px;
+        padding: 6px 12px;
+        font-size: 0.85rem;
+        transform: none;
     }
+    
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
     #game-container {
-        padding: 20px;
-        max-width: 90%;
+        padding: 20px 15px;
+        max-width: 100%;
+        margin: 10px;
     }
+    
     #color-display {
-        width: 160px;
-        height: 160px;
+        width: 180px;
+        height: 180px;
+        margin-bottom: 20px;
     }
-    button {
-        padding: 12px 20px;
-        font-size: 1rem;
-        min-width: 100px;
-    }
+    
     .options {
-        gap: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin: 20px 0;
+    }
+    
+    .options button {
+        padding: 14px 10px;
+        font-size: 1rem;
+        width: 100%;
+        min-width: auto;
+    }
+    
+    #score, #timer {
+        font-size: 1.2rem;
+        margin: 12px 0;
+    }
+    
+    #restart-judgement {
+        padding: 12px 24px;
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+    
+    #result {
+        font-size: 1.2rem;
+        padding: 15px;
+        margin-top: 15px;
+    }
+    
+    .comment-line {
+        font-size: 0.95rem;
+        margin: 6px 0;
     }
 }
 
