@@ -21,7 +21,7 @@
 
 1. 克隆此仓库：
 ```bash
-git clone https://github.com/你的GitHub用户名/色盲挑战.git
+git clone https://github.com/MeiYongAI/color-challenge.git
 ```
 
 2. 直接在浏览器中打开 `color-challenge.html` 文件
