@@ -113,23 +113,50 @@
             padding: 18px;
             background: rgba(255,240,248,.8);
             border-radius: 14px;
-            display: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
         }
         .comment-line {
             margin: 8px 0;
             padding: 6px 0;
-            border-bottom: 1px dotted #ffb6d9;
+            border-bottom: 1px solid rgba(255,107,157,.1);
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.3s ease;
         }
         .comment-line:last-child {
             border-bottom: none;
         }
-        .game-end #result,
+        .game-end #result {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 8px 32px rgba(255,107,157,.15);
+            border: 1px solid rgba(255,107,157,.2);
+        }
         .game-end #restart-judgement {
             display: block;
+            margin-top: 25px;
         }
         .game-end #color-display,
         .game-end .options {
             display: none;
+        }
+        .game-end .comment-line {
+            animation: slideIn 0.5s ease forwards;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
@@ -306,6 +333,8 @@ function startJudgementTimer(reset = true) {
     if (reset) timeLeft = 60;
     timerDisplay.textContent = `剩余时间：${timeLeft}秒`;
     resultDisplay.textContent = '';
+    resultDisplay.style.opacity = '0';
+    resultDisplay.style.visibility = 'hidden';
     gameTimer = setInterval(() => {
         timeLeft--;
         timerDisplay.textContent = `剩余时间：${timeLeft}秒`;
@@ -326,13 +355,21 @@ function startJudgementTimer(reset = true) {
             const comment = getRandomComment(level);
 
             resultDisplay.innerHTML = `
-                <div style="font-size:1.9rem; margin-bottom:12px; color:#ff4081;">
-                    游戏结束！得分：<span style="color:#ff6b9d; font-weight:bold;">${judgementScore}</span>
+                <div style="font-size:1.9rem; margin-bottom:15px; color:#ff4081; font-weight:bold;">
+                    游戏结束！得分：<span style="color:#ff6b9d;">${judgementScore}</span>
                 </div>
                 <div style="font-size:1.3rem; color:#ff8fb1; line-height:1.7;">
-                    ${comment.split('～').map(line => line ? `<div class="comment-line">${line}～</div>` : '').join('')}
+                    ${comment.split('～').map((line, index) => 
+                        line ? `<div class="comment-line" style="animation-delay:${index * 0.15}s">${line}～</div>` : ''
+                    ).join('')}
                 </div>
             `;
+            
+            resultDisplay.style.visibility = 'visible';
+            requestAnimationFrame(() => {
+                resultDisplay.style.opacity = '1';
+                resultDisplay.style.transform = 'translateY(0)';
+            });
         }
     }, 1000);
 }
