@@ -224,13 +224,13 @@ const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 const currentTheme = localStorage.getItem('theme');
 if (currentTheme === 'dark') {
     document.body.classList.add('dark-theme');
-    themeToggle.textContent = ' 朝霞缠绵';
+    themeToggle.textContent = '☀️';
 } else if (currentTheme === 'light') {
     document.body.classList.remove('dark-theme');
-    themeToggle.textContent = ' 暮色缠绵';
+    themeToggle.textContent = '🌙';
 } else if (prefersDarkScheme.matches) {
     document.body.classList.add('dark-theme');
-    themeToggle.textContent = ' 朝霞缠绵';
+    themeToggle.textContent = '☀️';
 }
 
 themeToggle.addEventListener('click', () => {
@@ -238,9 +238,9 @@ themeToggle.addEventListener('click', () => {
     
     if (document.body.classList.contains('dark-theme')) {
         localStorage.setItem('theme', 'dark');
-        themeToggle.textContent = ' 朝霞缠绵';
+        themeToggle.textContent = '☀️';
     } else {
         localStorage.setItem('theme', 'light');
-        themeToggle.textContent = ' 暮色缠绵';
+        themeToggle.textContent = '🌙';
     }
 });
