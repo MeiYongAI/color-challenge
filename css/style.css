@@ -272,24 +272,33 @@ button {
     overflow: hidden;
 }
 
+/* 排除主题按钮 */
+#theme-toggle {
+    padding: 0;
+    min-width: auto;
+    box-shadow: none;
+    background: transparent;
+    font-weight: normal;
+}
+
 /* 移动端触摸优化 */
 @media (max-width: 600px) {
-    button {
+    button:not(#theme-toggle) {
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
     }
     
-    button:active {
+    button:not(#theme-toggle):active {
         transform: scale(0.95);
     }
 }
 
-.dark-theme button {
+.dark-theme button:not(#theme-toggle) {
     background: var(--button-bg-dark);
     color: var(--button-text-dark);
 }
 
-button:hover { 
+button:not(#theme-toggle):hover { 
     transform: translateY(-3px) scale(1.05); 
     background: #ff8fb1;
     color: #fff;
