@@ -221,16 +221,27 @@ startJudgementRound();
 const themeToggle = document.getElementById('theme-toggle');
 const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 
+// 更新主题颜色（小白条）
+function updateThemeColor(isDark) {
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', isDark ? '#0a0408' : '#ffd1e3');
+    }
+}
+
 const currentTheme = localStorage.getItem('theme');
 if (currentTheme === 'dark') {
     document.body.classList.add('dark-theme');
     themeToggle.textContent = '☀️';
+    updateThemeColor(true);
 } else if (currentTheme === 'light') {
     document.body.classList.remove('dark-theme');
     themeToggle.textContent = '🌙';
+    updateThemeColor(false);
 } else if (prefersDarkScheme.matches) {
     document.body.classList.add('dark-theme');
     themeToggle.textContent = '☀️';
+    updateThemeColor(true);
 }
 
 themeToggle.addEventListener('click', () => {
@@ -239,8 +250,10 @@ themeToggle.addEventListener('click', () => {
     if (document.body.classList.contains('dark-theme')) {
         localStorage.setItem('theme', 'dark');
         themeToggle.textContent = '☀️';
+        updateThemeColor(true);
     } else {
         localStorage.setItem('theme', 'light');
         themeToggle.textContent = '🌙';
+        updateThemeColor(false);
     }
 });
