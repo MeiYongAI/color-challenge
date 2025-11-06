@@ -5,16 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>色盲挑战</title>
     <style>
+        :root {
+            --bg-gradient-light: linear-gradient(135deg, #ffeef8, #fff5f9);
+            --bg-gradient-dark: linear-gradient(135deg, #2a1721, #331a26);
+            --text-color-light: #333;
+            --text-color-dark: #ffeef8;
+            --container-bg-light: #fff;
+            --container-bg-dark: #1f1418;
+            --shadow-color-light: rgba(255,107,157,.15);
+            --shadow-color-dark: rgba(255,107,157,.3);
+            --primary-color: #ff6b9d;
+            --primary-color-dark: #ff4081;
+        }
         body {
             margin: 0;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #ffeef8, #fff5f9);
-            color: #333;
+            background: var(--bg-gradient-light);
+            color: var(--text-color-light);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            transition: all 0.5s ease;
+        }
+        body.dark-theme {
+            background: var(--bg-gradient-dark);
+            color: var(--text-color-dark);
+        }
+        #theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(255,107,157,.3);
+            transition: all 0.3s ease;
+        }
+        #theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255,107,157,.4);
+        }
+        .dark-theme #theme-toggle {
+            background: var(--primary-color-dark);
+            box-shadow: 0 4px 12px rgba(255,64,129,.4);
         }
         h1 {
             margin-bottom: 20px;
@@ -24,13 +63,18 @@
             letter-spacing: 1px;
         }
         #game-container {
-            background: #fff;
+            background: var(--container-bg-light);
             padding: 35px;
             border-radius: 16px;
-            box-shadow: 0 6px 25px rgba(255,107,157,.15);
+            box-shadow: 0 6px 25px var(--shadow-color-light);
             text-align: center;
             max-width: 600px;
             width: 100%;
+            transition: all 0.5s ease;
+        }
+        .dark-theme #game-container {
+            background: var(--container-bg-dark);
+            box-shadow: 0 6px 25px var(--shadow-color-dark);
         }
         #color-display {
             width: 200px;
@@ -135,6 +179,8 @@
     </style>
 </head>
 <body>
+
+<button id="theme-toggle">🌙 暗色模式</button>
 
 <div id="game-container">
     <h1>色盲挑战</h1>
@@ -350,6 +396,35 @@ restartJudgement.addEventListener('click', () => {
 
 startJudgementTimer();
 startJudgementRound();
+
+// 主题切换功能
+const themeToggle = document.getElementById('theme-toggle');
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+// 检查本地存储中的主题设置
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme === 'dark') {
+    document.body.classList.add('dark-theme');
+    themeToggle.textContent = '☀️ 亮色模式';
+} else if (currentTheme === 'light') {
+    document.body.classList.remove('dark-theme');
+    themeToggle.textContent = '🌙 暗色模式';
+} else if (prefersDarkScheme.matches) {
+    document.body.classList.add('dark-theme');
+    themeToggle.textContent = '☀️ 亮色模式';
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    
+    if (document.body.classList.contains('dark-theme')) {
+        localStorage.setItem('theme', 'dark');
+        themeToggle.textContent = '☀️ 亮色模式';
+    } else {
+        localStorage.setItem('theme', 'light');
+        themeToggle.textContent = '🌙 暗色模式';
+    }
+});
 </script>
 
 </body>
