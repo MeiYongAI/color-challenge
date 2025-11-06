@@ -67,73 +67,139 @@ body.dark-theme {
     box-shadow: 0 3px 10px rgba(255,64,129,.35);
 }
 
+/* 移动端优化 */
 @media (max-width: 600px) {
     body {
-        padding: 10px;
+        padding: 0;
         overflow-y: auto;
         height: auto;
         min-height: 100vh;
+        justify-content: flex-start;
+        padding-top: 60px;
+        padding-bottom: 20px;
     }
     
     #theme-toggle {
+        position: fixed;
         top: 10px;
         right: 10px;
-        padding: 6px 12px;
-        font-size: 0.85rem;
-        transform: none;
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        z-index: 1000;
+        box-shadow: 0 2px 8px rgba(255,107,157,.3);
     }
     
     h1 {
-        font-size: 1.8rem;
-        margin-bottom: 15px;
+        font-size: 2.2rem;
+        margin: 0 0 25px 0;
+        letter-spacing: 3px;
     }
     
     #game-container {
-        padding: 20px 15px;
+        padding: 30px 20px 35px;
         max-width: 100%;
-        margin: 10px;
+        width: calc(100% - 20px);
+        margin: 0 10px;
+        border-radius: 20px;
+    }
+    
+    #color-display {
+        width: 220px;
+        height: 220px;
+        margin: 0 auto 30px;
+        border-width: 4px;
+    }
+    
+    .options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin: 0 0 25px 0;
+        max-width: 100%;
+    }
+    
+    .options button {
+        padding: 18px 12px;
+        font-size: 1.1rem;
+        width: 100%;
+        min-width: auto;
+        border-radius: 12px;
+        white-space: normal;
+        line-height: 1.3;
+        min-height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #score {
+        font-size: 1.5rem;
+        margin: 18px 0 10px;
+        font-weight: bold;
+    }
+    
+    #timer {
+        font-size: 1.4rem;
+        margin: 10px 0 25px;
+    }
+    
+    #restart-judgement {
+        padding: 16px 40px;
+        font-size: 1.15rem;
+        margin-top: 25px;
+        border-radius: 50px;
+        min-height: 50px;
+    }
+    
+    #result {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        padding: 20px;
+        margin-top: 25px;
+        border-radius: 15px;
+        max-width: 100%;
+    }
+    
+    .comment-line {
+        font-size: 1.05rem;
+        margin: 10px 0;
+        padding: 10px 0;
+    }
+}
+
+/* 超小屏幕优化 */
+@media (max-width: 380px) {
+    h1 {
+        font-size: 1.9rem;
+        letter-spacing: 2px;
+    }
+    
+    #game-container {
+        padding: 25px 15px 30px;
     }
     
     #color-display {
         width: 180px;
         height: 180px;
-        margin-bottom: 20px;
-    }
-    
-    .options {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        margin: 20px 0;
     }
     
     .options button {
-        padding: 14px 10px;
+        padding: 16px 10px;
         font-size: 1rem;
-        width: 100%;
-        min-width: auto;
+        min-height: 52px;
     }
     
-    #score, #timer {
+    #score {
+        font-size: 1.3rem;
+    }
+    
+    #timer {
         font-size: 1.2rem;
-        margin: 12px 0;
     }
     
     #restart-judgement {
-        padding: 12px 24px;
-        font-size: 1rem;
-        margin-top: 15px;
-    }
-    
-    #result {
-        font-size: 1.2rem;
-        padding: 15px;
-        margin-top: 15px;
-    }
-    
-    .comment-line {
-        font-size: 0.95rem;
-        margin: 6px 0;
+        padding: 14px 32px;
+        font-size: 1.05rem;
     }
 }
 
@@ -181,6 +247,7 @@ h1 {
     justify-content: center;
     gap: 16px;
     flex-wrap: wrap;
+    margin: 20px 0;
 }
 
 button {
@@ -195,6 +262,20 @@ button {
     font-weight: bold;
     box-shadow: 0 3px 8px rgba(255,107,157,.2);
     min-width: 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 移动端触摸优化 */
+@media (max-width: 600px) {
+    button {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    button:active {
+        transform: scale(0.95);
+    }
 }
 
 .dark-theme button {
